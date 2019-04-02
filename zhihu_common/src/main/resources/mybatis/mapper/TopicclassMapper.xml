@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhihu.dao.TopicclassMapper">
+  <resultMap id="BaseResultMap" type="com.zhihu.domain.Topicclass">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="TopicClassId" jdbcType="VARCHAR" property="topicclassid" />
+    <result column="TopicClassName" jdbcType="VARCHAR" property="topicclassname" />
+    <result column="TopicClassDescribe" jdbcType="VARCHAR" property="topicclassdescribe" />
+    <result column="Photo" jdbcType="VARCHAR" property="photo" />
+    <result column="CreateTime" jdbcType="DATE" property="createtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, TopicClassId, TopicClassName, TopicClassDescribe, Photo, CreateTime
+  </sql>
+  <select id="selectByExample" parameterType="com.zhihu.domain.TopicclassExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_topicclass
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_topicclass
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_topicclass
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhihu.domain.TopicclassExample">
+    delete from t_topicclass
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhihu.domain.Topicclass">
+    insert into t_topicclass (Id, TopicClassId, TopicClassName, 
+      TopicClassDescribe, Photo, CreateTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{topicclassid,jdbcType=VARCHAR}, #{topicclassname,jdbcType=VARCHAR}, 
+      #{topicclassdescribe,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhihu.domain.Topicclass">
+    insert into t_topicclass
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="topicclassid != null">
+        TopicClassId,
+      </if>
+      <if test="topicclassname != null">
+        TopicClassName,
+      </if>
+      <if test="topicclassdescribe != null">
+        TopicClassDescribe,
+      </if>
+      <if test="photo != null">
+        Photo,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="topicclassid != null">
+        #{topicclassid,jdbcType=VARCHAR},
+      </if>
+      <if test="topicclassname != null">
+        #{topicclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="topicclassdescribe != null">
+        #{topicclassdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhihu.domain.TopicclassExample" resultType="java.lang.Long">
+    select count(*) from t_topicclass
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_topicclass
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicclassid != null">
+        TopicClassId = #{record.topicclassid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topicclassname != null">
+        TopicClassName = #{record.topicclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topicclassdescribe != null">
+        TopicClassDescribe = #{record.topicclassdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo != null">
+        Photo = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_topicclass
+    set Id = #{record.id,jdbcType=INTEGER},
+      TopicClassId = #{record.topicclassid,jdbcType=VARCHAR},
+      TopicClassName = #{record.topicclassname,jdbcType=VARCHAR},
+      TopicClassDescribe = #{record.topicclassdescribe,jdbcType=VARCHAR},
+      Photo = #{record.photo,jdbcType=VARCHAR},
+      CreateTime = #{record.createtime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhihu.domain.Topicclass">
+    update t_topicclass
+    <set>
+      <if test="topicclassid != null">
+        TopicClassId = #{topicclassid,jdbcType=VARCHAR},
+      </if>
+      <if test="topicclassname != null">
+        TopicClassName = #{topicclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="topicclassdescribe != null">
+        TopicClassDescribe = #{topicclassdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        Photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=DATE},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhihu.domain.Topicclass">
+    update t_topicclass
+    set TopicClassId = #{topicclassid,jdbcType=VARCHAR},
+      TopicClassName = #{topicclassname,jdbcType=VARCHAR},
+      TopicClassDescribe = #{topicclassdescribe,jdbcType=VARCHAR},
+      Photo = #{photo,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=DATE}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

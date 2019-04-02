@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/zhihu_book/zhihu_book.iml" filepath="$PROJECT_DIR$/zhihu_book/zhihu_book.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zhihu_common/zhihu_common.iml" filepath="$PROJECT_DIR$/zhihu_common/zhihu_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zhihu_live/zhihu_live.iml" filepath="$PROJECT_DIR$/zhihu_live/zhihu_live.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zhihu_manage/zhihu_manage.iml" filepath="$PROJECT_DIR$/zhihu_manage/zhihu_manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zhihu_parent.iml" filepath="$PROJECT_DIR$/zhihu_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zhihu_roundtable/zhihu_roundtable.iml" filepath="$PROJECT_DIR$/zhihu_roundtable/zhihu_roundtable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zhihu_specialcolumn/zhihu_specialcolumn.iml" filepath="$PROJECT_DIR$/zhihu_specialcolumn/zhihu_specialcolumn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zhihu_web/zhihu_web.iml" filepath="$PROJECT_DIR$/zhihu_web/zhihu_web.iml" />
+    </modules>
+  </component>
+</project>

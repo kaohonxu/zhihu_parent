@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="zhihu_book" />
+        <module name="zhihu_common" />
+        <module name="zhihu_live" />
+        <module name="zhihu_manage" />
+        <module name="zhihu_parent" />
+        <module name="zhihu_roundtable" />
+        <module name="zhihu_specialcolumn" />
+        <module name="zhihu_web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="zhihu_book" target="1.7" />
+      <module name="zhihu_common" target="1.7" />
+      <module name="zhihu_live" target="1.7" />
+      <module name="zhihu_manage" target="1.7" />
+      <module name="zhihu_parent" target="1.7" />
+      <module name="zhihu_roundtable" target="1.7" />
+      <module name="zhihu_specialcolumn" target="1.7" />
+      <module name="zhihu_web" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

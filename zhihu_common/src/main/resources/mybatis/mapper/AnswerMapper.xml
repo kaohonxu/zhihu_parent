@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhihu.dao.AnswerMapper">
+  <resultMap id="BaseResultMap" type="com.zhihu.domain.Answer">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="AnswerId" jdbcType="VARCHAR" property="answerid" />
+    <result column="UserId" jdbcType="VARCHAR" property="userid" />
+    <result column="TopicId" jdbcType="VARCHAR" property="topicid" />
+    <result column="QuesId" jdbcType="VARCHAR" property="quesid" />
+    <result column="AnswerContent" jdbcType="VARCHAR" property="answercontent" />
+    <result column="Photo" jdbcType="VARCHAR" property="photo" />
+    <result column="Anonymity" jdbcType="CHAR" property="anonymity" />
+    <result column="CommentNumb" jdbcType="INTEGER" property="commentnumb" />
+    <result column="ReportNumb" jdbcType="INTEGER" property="reportnumb" />
+    <result column="CreateTime" jdbcType="DATE" property="createtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, AnswerId, UserId, TopicId, QuesId, AnswerContent, Photo, Anonymity, CommentNumb, 
+    ReportNumb, CreateTime
+  </sql>
+  <select id="selectByExample" parameterType="com.zhihu.domain.AnswerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_answer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_answer
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_answer
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhihu.domain.AnswerExample">
+    delete from t_answer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhihu.domain.Answer">
+    insert into t_answer (Id, AnswerId, UserId, 
+      TopicId, QuesId, AnswerContent, 
+      Photo, Anonymity, CommentNumb, 
+      ReportNumb, CreateTime)
+    values (#{id,jdbcType=INTEGER}, #{answerid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{topicid,jdbcType=VARCHAR}, #{quesid,jdbcType=VARCHAR}, #{answercontent,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{anonymity,jdbcType=CHAR}, #{commentnumb,jdbcType=INTEGER}, 
+      #{reportnumb,jdbcType=INTEGER}, #{createtime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhihu.domain.Answer">
+    insert into t_answer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="answerid != null">
+        AnswerId,
+      </if>
+      <if test="userid != null">
+        UserId,
+      </if>
+      <if test="topicid != null">
+        TopicId,
+      </if>
+      <if test="quesid != null">
+        QuesId,
+      </if>
+      <if test="answercontent != null">
+        AnswerContent,
+      </if>
+      <if test="photo != null">
+        Photo,
+      </if>
+      <if test="anonymity != null">
+        Anonymity,
+      </if>
+      <if test="commentnumb != null">
+        CommentNumb,
+      </if>
+      <if test="reportnumb != null">
+        ReportNumb,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="answerid != null">
+        #{answerid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="topicid != null">
+        #{topicid,jdbcType=VARCHAR},
+      </if>
+      <if test="quesid != null">
+        #{quesid,jdbcType=VARCHAR},
+      </if>
+      <if test="answercontent != null">
+        #{answercontent,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="anonymity != null">
+        #{anonymity,jdbcType=CHAR},
+      </if>
+      <if test="commentnumb != null">
+        #{commentnumb,jdbcType=INTEGER},
+      </if>
+      <if test="reportnumb != null">
+        #{reportnumb,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhihu.domain.AnswerExample" resultType="java.lang.Long">
+    select count(*) from t_answer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_answer
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.answerid != null">
+        AnswerId = #{record.answerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        UserId = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topicid != null">
+        TopicId = #{record.topicid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quesid != null">
+        QuesId = #{record.quesid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answercontent != null">
+        AnswerContent = #{record.answercontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo != null">
+        Photo = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.anonymity != null">
+        Anonymity = #{record.anonymity,jdbcType=CHAR},
+      </if>
+      <if test="record.commentnumb != null">
+        CommentNumb = #{record.commentnumb,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportnumb != null">
+        ReportNumb = #{record.reportnumb,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_answer
+    set Id = #{record.id,jdbcType=INTEGER},
+      AnswerId = #{record.answerid,jdbcType=VARCHAR},
+      UserId = #{record.userid,jdbcType=VARCHAR},
+      TopicId = #{record.topicid,jdbcType=VARCHAR},
+      QuesId = #{record.quesid,jdbcType=VARCHAR},
+      AnswerContent = #{record.answercontent,jdbcType=VARCHAR},
+      Photo = #{record.photo,jdbcType=VARCHAR},
+      Anonymity = #{record.anonymity,jdbcType=CHAR},
+      CommentNumb = #{record.commentnumb,jdbcType=INTEGER},
+      ReportNumb = #{record.reportnumb,jdbcType=INTEGER},
+      CreateTime = #{record.createtime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhihu.domain.Answer">
+    update t_answer
+    <set>
+      <if test="answerid != null">
+        AnswerId = #{answerid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        UserId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="topicid != null">
+        TopicId = #{topicid,jdbcType=VARCHAR},
+      </if>
+      <if test="quesid != null">
+        QuesId = #{quesid,jdbcType=VARCHAR},
+      </if>
+      <if test="answercontent != null">
+        AnswerContent = #{answercontent,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        Photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="anonymity != null">
+        Anonymity = #{anonymity,jdbcType=CHAR},
+      </if>
+      <if test="commentnumb != null">
+        CommentNumb = #{commentnumb,jdbcType=INTEGER},
+      </if>
+      <if test="reportnumb != null">
+        ReportNumb = #{reportnumb,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=DATE},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhihu.domain.Answer">
+    update t_answer
+    set AnswerId = #{answerid,jdbcType=VARCHAR},
+      UserId = #{userid,jdbcType=VARCHAR},
+      TopicId = #{topicid,jdbcType=VARCHAR},
+      QuesId = #{quesid,jdbcType=VARCHAR},
+      AnswerContent = #{answercontent,jdbcType=VARCHAR},
+      Photo = #{photo,jdbcType=VARCHAR},
+      Anonymity = #{anonymity,jdbcType=CHAR},
+      CommentNumb = #{commentnumb,jdbcType=INTEGER},
+      ReportNumb = #{reportnumb,jdbcType=INTEGER},
+      CreateTime = #{createtime,jdbcType=DATE}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

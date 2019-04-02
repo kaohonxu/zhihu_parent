@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhihu.dao.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.zhihu.domain.Users">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="UserId" jdbcType="VARCHAR" property="userid" />
+    <result column="Email" jdbcType="VARCHAR" property="email" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+    <result column="SurName" jdbcType="VARCHAR" property="surname" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Gender" jdbcType="CHAR" property="gender" />
+    <result column="Photo" jdbcType="VARCHAR" property="photo" />
+    <result column="Autograph" jdbcType="VARCHAR" property="autograph" />
+    <result column="Introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="PrivacyProtection" jdbcType="CHAR" property="privacyprotection" />
+    <result column="PraiseNumb" jdbcType="INTEGER" property="praisenumb" />
+    <result column="ThankNumb" jdbcType="INTEGER" property="thanknumb" />
+    <result column="QuestionNumb" jdbcType="INTEGER" property="questionnumb" />
+    <result column="AnswerNumb" jdbcType="INTEGER" property="answernumb" />
+    <result column="CollectNumb" jdbcType="INTEGER" property="collectnumb" />
+    <result column="EditNumb" jdbcType="INTEGER" property="editnumb" />
+    <result column="AttentionNumb" jdbcType="INTEGER" property="attentionnumb" />
+    <result column="FollowerNumb" jdbcType="INTEGER" property="followernumb" />
+    <result column="ConcernTopicNumb" jdbcType="INTEGER" property="concerntopicnumb" />
+    <result column="PersonalityUrl" jdbcType="VARCHAR" property="personalityurl" />
+    <result column="Company" jdbcType="VARCHAR" property="company" />
+    <result column="Position" jdbcType="VARCHAR" property="position" />
+    <result column="School" jdbcType="VARCHAR" property="school" />
+    <result column="Major" jdbcType="VARCHAR" property="major" />
+    <result column="EmailActivate" jdbcType="CHAR" property="emailactivate" />
+    <result column="Forbidden" jdbcType="CHAR" property="forbidden" />
+    <result column="ForbiddenTime" jdbcType="DATE" property="forbiddentime" />
+    <result column="role" jdbcType="CHAR" property="role" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, UserId, Email, Password, SurName, Name, Gender, Photo, Autograph, Introduce, 
+    PrivacyProtection, PraiseNumb, ThankNumb, QuestionNumb, AnswerNumb, CollectNumb, 
+    EditNumb, AttentionNumb, FollowerNumb, ConcernTopicNumb, PersonalityUrl, Company, 
+    Position, School, Major, EmailActivate, Forbidden, ForbiddenTime, role, CreateTime
+  </sql>
+  <select id="selectByExample" parameterType="com.zhihu.domain.UsersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_users
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_users
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhihu.domain.UsersExample">
+    delete from t_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhihu.domain.Users">
+    insert into t_users (Id, UserId, Email, 
+      Password, SurName, Name, 
+      Gender, Photo, Autograph, 
+      Introduce, PrivacyProtection, PraiseNumb, 
+      ThankNumb, QuestionNumb, AnswerNumb, 
+      CollectNumb, EditNumb, AttentionNumb, 
+      FollowerNumb, ConcernTopicNumb, PersonalityUrl, 
+      Company, Position, School, 
+      Major, EmailActivate, Forbidden, 
+      ForbiddenTime, role, CreateTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{surname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=CHAR}, #{photo,jdbcType=VARCHAR}, #{autograph,jdbcType=VARCHAR}, 
+      #{introduce,jdbcType=VARCHAR}, #{privacyprotection,jdbcType=CHAR}, #{praisenumb,jdbcType=INTEGER}, 
+      #{thanknumb,jdbcType=INTEGER}, #{questionnumb,jdbcType=INTEGER}, #{answernumb,jdbcType=INTEGER}, 
+      #{collectnumb,jdbcType=INTEGER}, #{editnumb,jdbcType=INTEGER}, #{attentionnumb,jdbcType=INTEGER}, 
+      #{followernumb,jdbcType=INTEGER}, #{concerntopicnumb,jdbcType=INTEGER}, #{personalityurl,jdbcType=VARCHAR}, 
+      #{company,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
+      #{major,jdbcType=VARCHAR}, #{emailactivate,jdbcType=CHAR}, #{forbidden,jdbcType=CHAR}, 
+      #{forbiddentime,jdbcType=DATE}, #{role,jdbcType=CHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhihu.domain.Users">
+    insert into t_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="userid != null">
+        UserId,
+      </if>
+      <if test="email != null">
+        Email,
+      </if>
+      <if test="password != null">
+        Password,
+      </if>
+      <if test="surname != null">
+        SurName,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="gender != null">
+        Gender,
+      </if>
+      <if test="photo != null">
+        Photo,
+      </if>
+      <if test="autograph != null">
+        Autograph,
+      </if>
+      <if test="introduce != null">
+        Introduce,
+      </if>
+      <if test="privacyprotection != null">
+        PrivacyProtection,
+      </if>
+      <if test="praisenumb != null">
+        PraiseNumb,
+      </if>
+      <if test="thanknumb != null">
+        ThankNumb,
+      </if>
+      <if test="questionnumb != null">
+        QuestionNumb,
+      </if>
+      <if test="answernumb != null">
+        AnswerNumb,
+      </if>
+      <if test="collectnumb != null">
+        CollectNumb,
+      </if>
+      <if test="editnumb != null">
+        EditNumb,
+      </if>
+      <if test="attentionnumb != null">
+        AttentionNumb,
+      </if>
+      <if test="followernumb != null">
+        FollowerNumb,
+      </if>
+      <if test="concerntopicnumb != null">
+        ConcernTopicNumb,
+      </if>
+      <if test="personalityurl != null">
+        PersonalityUrl,
+      </if>
+      <if test="company != null">
+        Company,
+      </if>
+      <if test="position != null">
+        Position,
+      </if>
+      <if test="school != null">
+        School,
+      </if>
+      <if test="major != null">
+        Major,
+      </if>
+      <if test="emailactivate != null">
+        EmailActivate,
+      </if>
+      <if test="forbidden != null">
+        Forbidden,
+      </if>
+      <if test="forbiddentime != null">
+        ForbiddenTime,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="surname != null">
+        #{surname,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="autograph != null">
+        #{autograph,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="privacyprotection != null">
+        #{privacyprotection,jdbcType=CHAR},
+      </if>
+      <if test="praisenumb != null">
+        #{praisenumb,jdbcType=INTEGER},
+      </if>
+      <if test="thanknumb != null">
+        #{thanknumb,jdbcType=INTEGER},
+      </if>
+      <if test="questionnumb != null">
+        #{questionnumb,jdbcType=INTEGER},
+      </if>
+      <if test="answernumb != null">
+        #{answernumb,jdbcType=INTEGER},
+      </if>
+      <if test="collectnumb != null">
+        #{collectnumb,jdbcType=INTEGER},
+      </if>
+      <if test="editnumb != null">
+        #{editnumb,jdbcType=INTEGER},
+      </if>
+      <if test="attentionnumb != null">
+        #{attentionnumb,jdbcType=INTEGER},
+      </if>
+      <if test="followernumb != null">
+        #{followernumb,jdbcType=INTEGER},
+      </if>
+      <if test="concerntopicnumb != null">
+        #{concerntopicnumb,jdbcType=INTEGER},
+      </if>
+      <if test="personalityurl != null">
+        #{personalityurl,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="emailactivate != null">
+        #{emailactivate,jdbcType=CHAR},
+      </if>
+      <if test="forbidden != null">
+        #{forbidden,jdbcType=CHAR},
+      </if>
+      <if test="forbiddentime != null">
+        #{forbiddentime,jdbcType=DATE},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhihu.domain.UsersExample" resultType="java.lang.Long">
+    select count(*) from t_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_users
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null">
+        UserId = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        Email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        Password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.surname != null">
+        SurName = #{record.surname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        Gender = #{record.gender,jdbcType=CHAR},
+      </if>
+      <if test="record.photo != null">
+        Photo = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autograph != null">
+        Autograph = #{record.autograph,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduce != null">
+        Introduce = #{record.introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privacyprotection != null">
+        PrivacyProtection = #{record.privacyprotection,jdbcType=CHAR},
+      </if>
+      <if test="record.praisenumb != null">
+        PraiseNumb = #{record.praisenumb,jdbcType=INTEGER},
+      </if>
+      <if test="record.thanknumb != null">
+        ThankNumb = #{record.thanknumb,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionnumb != null">
+        QuestionNumb = #{record.questionnumb,jdbcType=INTEGER},
+      </if>
+      <if test="record.answernumb != null">
+        AnswerNumb = #{record.answernumb,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectnumb != null">
+        CollectNumb = #{record.collectnumb,jdbcType=INTEGER},
+      </if>
+      <if test="record.editnumb != null">
+        EditNumb = #{record.editnumb,jdbcType=INTEGER},
+      </if>
+      <if test="record.attentionnumb != null">
+        AttentionNumb = #{record.attentionnumb,jdbcType=INTEGER},
+      </if>
+      <if test="record.followernumb != null">
+        FollowerNumb = #{record.followernumb,jdbcType=INTEGER},
+      </if>
+      <if test="record.concerntopicnumb != null">
+        ConcernTopicNumb = #{record.concerntopicnumb,jdbcType=INTEGER},
+      </if>
+      <if test="record.personalityurl != null">
+        PersonalityUrl = #{record.personalityurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null">
+        Company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null">
+        Position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null">
+        School = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.major != null">
+        Major = #{record.major,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailactivate != null">
+        EmailActivate = #{record.emailactivate,jdbcType=CHAR},
+      </if>
+      <if test="record.forbidden != null">
+        Forbidden = #{record.forbidden,jdbcType=CHAR},
+      </if>
+      <if test="record.forbiddentime != null">
+        ForbiddenTime = #{record.forbiddentime,jdbcType=DATE},
+      </if>
+      <if test="record.role != null">
+        role = #{record.role,jdbcType=CHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_users
+    set Id = #{record.id,jdbcType=INTEGER},
+      UserId = #{record.userid,jdbcType=VARCHAR},
+      Email = #{record.email,jdbcType=VARCHAR},
+      Password = #{record.password,jdbcType=VARCHAR},
+      SurName = #{record.surname,jdbcType=VARCHAR},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Gender = #{record.gender,jdbcType=CHAR},
+      Photo = #{record.photo,jdbcType=VARCHAR},
+      Autograph = #{record.autograph,jdbcType=VARCHAR},
+      Introduce = #{record.introduce,jdbcType=VARCHAR},
+      PrivacyProtection = #{record.privacyprotection,jdbcType=CHAR},
+      PraiseNumb = #{record.praisenumb,jdbcType=INTEGER},
+      ThankNumb = #{record.thanknumb,jdbcType=INTEGER},
+      QuestionNumb = #{record.questionnumb,jdbcType=INTEGER},
+      AnswerNumb = #{record.answernumb,jdbcType=INTEGER},
+      CollectNumb = #{record.collectnumb,jdbcType=INTEGER},
+      EditNumb = #{record.editnumb,jdbcType=INTEGER},
+      AttentionNumb = #{record.attentionnumb,jdbcType=INTEGER},
+      FollowerNumb = #{record.followernumb,jdbcType=INTEGER},
+      ConcernTopicNumb = #{record.concerntopicnumb,jdbcType=INTEGER},
+      PersonalityUrl = #{record.personalityurl,jdbcType=VARCHAR},
+      Company = #{record.company,jdbcType=VARCHAR},
+      Position = #{record.position,jdbcType=VARCHAR},
+      School = #{record.school,jdbcType=VARCHAR},
+      Major = #{record.major,jdbcType=VARCHAR},
+      EmailActivate = #{record.emailactivate,jdbcType=CHAR},
+      Forbidden = #{record.forbidden,jdbcType=CHAR},
+      ForbiddenTime = #{record.forbiddentime,jdbcType=DATE},
+      role = #{record.role,jdbcType=CHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhihu.domain.Users">
+    update t_users
+    <set>
+      <if test="userid != null">
+        UserId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="surname != null">
+        SurName = #{surname,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        Gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="photo != null">
+        Photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="autograph != null">
+        Autograph = #{autograph,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        Introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="privacyprotection != null">
+        PrivacyProtection = #{privacyprotection,jdbcType=CHAR},
+      </if>
+      <if test="praisenumb != null">
+        PraiseNumb = #{praisenumb,jdbcType=INTEGER},
+      </if>
+      <if test="thanknumb != null">
+        ThankNumb = #{thanknumb,jdbcType=INTEGER},
+      </if>
+      <if test="questionnumb != null">
+        QuestionNumb = #{questionnumb,jdbcType=INTEGER},
+      </if>
+      <if test="answernumb != null">
+        AnswerNumb = #{answernumb,jdbcType=INTEGER},
+      </if>
+      <if test="collectnumb != null">
+        CollectNumb = #{collectnumb,jdbcType=INTEGER},
+      </if>
+      <if test="editnumb != null">
+        EditNumb = #{editnumb,jdbcType=INTEGER},
+      </if>
+      <if test="attentionnumb != null">
+        AttentionNumb = #{attentionnumb,jdbcType=INTEGER},
+      </if>
+      <if test="followernumb != null">
+        FollowerNumb = #{followernumb,jdbcType=INTEGER},
+      </if>
+      <if test="concerntopicnumb != null">
+        ConcernTopicNumb = #{concerntopicnumb,jdbcType=INTEGER},
+      </if>
+      <if test="personalityurl != null">
+        PersonalityUrl = #{personalityurl,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        Company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        Position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        School = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        Major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="emailactivate != null">
+        EmailActivate = #{emailactivate,jdbcType=CHAR},
+      </if>
+      <if test="forbidden != null">
+        Forbidden = #{forbidden,jdbcType=CHAR},
+      </if>
+      <if test="forbiddentime != null">
+        ForbiddenTime = #{forbiddentime,jdbcType=DATE},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhihu.domain.Users">
+    update t_users
+    set UserId = #{userid,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      SurName = #{surname,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      Gender = #{gender,jdbcType=CHAR},
+      Photo = #{photo,jdbcType=VARCHAR},
+      Autograph = #{autograph,jdbcType=VARCHAR},
+      Introduce = #{introduce,jdbcType=VARCHAR},
+      PrivacyProtection = #{privacyprotection,jdbcType=CHAR},
+      PraiseNumb = #{praisenumb,jdbcType=INTEGER},
+      ThankNumb = #{thanknumb,jdbcType=INTEGER},
+      QuestionNumb = #{questionnumb,jdbcType=INTEGER},
+      AnswerNumb = #{answernumb,jdbcType=INTEGER},
+      CollectNumb = #{collectnumb,jdbcType=INTEGER},
+      EditNumb = #{editnumb,jdbcType=INTEGER},
+      AttentionNumb = #{attentionnumb,jdbcType=INTEGER},
+      FollowerNumb = #{followernumb,jdbcType=INTEGER},
+      ConcernTopicNumb = #{concerntopicnumb,jdbcType=INTEGER},
+      PersonalityUrl = #{personalityurl,jdbcType=VARCHAR},
+      Company = #{company,jdbcType=VARCHAR},
+      Position = #{position,jdbcType=VARCHAR},
+      School = #{school,jdbcType=VARCHAR},
+      Major = #{major,jdbcType=VARCHAR},
+      EmailActivate = #{emailactivate,jdbcType=CHAR},
+      Forbidden = #{forbidden,jdbcType=CHAR},
+      ForbiddenTime = #{forbiddentime,jdbcType=DATE},
+      role = #{role,jdbcType=CHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,19 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/zhihu?characterEncoding=utf-8
+    username: root
+    password: 123456
+  thymeleaf:
+    cache: false
+  jta:
+    atomikos:
+      datasource:
+        max-pool-size: 50
+        min-pool-size: 10
+mybatis:
+  configuration:
+    auto-mapping-behavior: full
+

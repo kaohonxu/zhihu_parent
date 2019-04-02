@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zhihu_book" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zhihu_common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zhihu_live" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zhihu_manage" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zhihu_roundtable" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zhihu_specialcolumn" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zhihu_web" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
