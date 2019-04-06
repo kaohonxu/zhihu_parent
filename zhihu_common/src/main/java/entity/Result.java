@@ -65,8 +65,9 @@ public class Result {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public Result setCode(Integer code) {
         this.code = code;
+        return this;
     }
 
     public String getMessage() {

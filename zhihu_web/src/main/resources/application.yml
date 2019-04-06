@@ -13,7 +13,12 @@ spring:
       datasource:
         max-pool-size: 50
         min-pool-size: 10
+  servlet:
+    multipart:
+      max-file-size: 524000000 #大小约 500M
 mybatis:
   configuration:
     auto-mapping-behavior: full
+logging:
+  file: logging.log
 

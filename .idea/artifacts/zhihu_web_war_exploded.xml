@@ -7,6 +7,7 @@
           <element id="module-output" name="zhihu_web" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.baidu.ueditor:ueditor:1.1.2" />
           <element id="archive" name="zhihu_common-1.0-SNAPSHOT.jar">
             <element id="module-output" name="zhihu_common" />
           </element>
